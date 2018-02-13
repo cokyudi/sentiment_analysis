@@ -42,7 +42,7 @@
 
     <form action="{{URL('auth')}}" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Nama" name="nama" required="true">
+        <input type="text" class="form-control" placeholder="Nama" name="username" required="true">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -116,7 +116,7 @@
       .done(function(data) { console.log(data);
         if(data.status==='OK'){
           let url = $('meta[name=url]').prop('content');
-          window.location.replace(url+'/transaksi');
+          window.location.replace(url+'/dashboard');
         }
         else{
           $('.login-box-msg').addClass('has-error');
