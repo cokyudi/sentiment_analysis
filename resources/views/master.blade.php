@@ -108,43 +108,43 @@
         </li>
         <li id="menu-laporan">
           <a href="{{URL('laporan')}}">
-            <i class="fa fa-th"></i> <span>Laporan</span>
+            <i class="fa fa-bar-chart"></i> <span>Laporan</span>
           </a>
         </li>
         @if(session()->get('admin')['level'] == 1)
         <li id="menu-pengetahuan">
           <a href="{{URL('pengetahuan')}}">
-            <i class="fa fa-th"></i> <span>Tabel Pengetahuan</span>
+            <i class="fa fa-database"></i> <span>Tabel Pengetahuan</span>
           </a>
         </li>
         <li id="menu-training">
           <a href="{{URL('training')}}">
-            <i class="fa fa-th"></i> <span>Data Training</span>
+            <i class="fa fa-book"></i> <span>Training</span>
           </a>
         </li>
         <li id="menu-testing">
           <a href="{{URL('testing')}}">
-            <i class="fa fa-th"></i> <span>Data Testing</span>
+            <i class="fa fa-play-circle"></i> <span>Testing</span>
           </a>
         </li>
         <li id="menu-stopword">
           <a href="{{URL('stopword')}}">
-            <i class="fa fa-th"></i> <span>Tabel Stopword</span>
+            <i class="fa fa-book"></i> <span>Tabel Stopword</span>
           </a>
         </li>
         <li id="menu-kamus">
           <a href="{{URL('kamus')}}">
-            <i class="fa fa-th"></i> <span>Tabel Kamus</span>
+            <i class="fa fa-book"></i> <span>Tabel Kamus</span>
           </a>
         </li>
         <li id="menu-pengujian">
           <a href="{{URL('pengujian')}}">
-            <i class="fa fa-th"></i> <span>Pengujian</span>
+            <i class="fa fa-check"></i> <span>Pengujian</span>
           </a>
         </li>
         <li id="menu-setting">
           <a href="{{URL('setting')}}">
-            <i class="fa fa-th"></i> <span>Setting</span>
+            <i class="fa fa-gears"></i> <span>Setting</span>
           </a>
         </li>
         @endif

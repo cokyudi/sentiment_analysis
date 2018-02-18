@@ -14,13 +14,12 @@ class AuthMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
+    public function handle($request, Closure $next){
         if($request->session()->has('admin')){
             return $next($request);
         }
         else{
-            $_token = $request->input('_token');
+            $_token = $request->session()->get('_token');
             $admin = Admin::where('remember_token','=',$_token)->first();
             if($admin == null){
                 return redirect('login');
@@ -36,5 +35,6 @@ class AuthMiddleware
                 return $next($request);
             }
         }
+
     }
 }
