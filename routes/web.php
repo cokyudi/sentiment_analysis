@@ -22,3 +22,9 @@ Route::get('/logout', 'AuthController@logout');
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::get('/admin', 'AdminController@index');
+Route::post('/admin/data', 'AdminController@data');
+Route::post('/admin/store', 'AdminController@store');
+Route::post('/admin/{id}/update', 'AdminController@update');
+Route::post('/admin/{id}/read', 'AdminController@read');
+Route::post('/admin/{id}/delete', 'AdminController@delete');
+Route::post('/admin/{id}/updatePassword', 'AdminController@updatePassword');

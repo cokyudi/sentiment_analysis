@@ -21,6 +21,7 @@
 	        <tr>
 	        	<th>Nama</th>
 	        	<th>Level</th>
+				<th>Username</th>
 	        	<th>Aksi</th>
 	        </tr>
 	        </thead>
@@ -29,8 +30,9 @@
 	        </tbody>
 	        <tfoot>
 	        <tr>
-	          <th>Nama</th>
-	          <th>Level</th>
+	          	<th>Nama</th>
+	          	<th>Level</th>
+				<th>Username</th>
 	        	<th>Aksi</th>
 	        </tr>
 	        </tfoot>
@@ -44,9 +46,16 @@
 </div>
 <!-- /.row -->
 
+@include('modal/modal-admin')
+@include('modal/modal-admin2')
+@include('modal/modal-admin3')
+
 @endsection
 
 @section('script')
+<script src="{{URL('public')}}/js/admin.js"></script>
+<script src="{{URL('public')}}/js/admin2.js"></script>
+<script src="{{URL('public')}}/js/admin3.js"></script>
 <script>
 	var dataTableAdmin;
 	$(document).ready(function() {
@@ -54,6 +63,23 @@
 		$('#menu-admin').addClass('active');
 
 		// Ambil data admin dan tampilkan dengan datatable
+		dataTableAdmin = $('#table-admin').DataTable({
+	      "processing": true,
+	      "serverSide": true,
+	      "ajax":{
+				"url": "{{ URL('admin/data') }}",
+				"dataType": "json",
+				"type": "POST",
+				"data":{ _token: "{{csrf_token()}}"}
+	      },
+	      "columns": [
+	        { "data": "nama" },
+	        { "data": "level" },
+			{ "data": "username" },
+	        { "data": "aksi", "orderable": false }
+	      ],
+	      "order": [[0, "desc"]]
+	  	});
 
 	});
 </script>
