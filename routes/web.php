@@ -28,3 +28,11 @@ Route::post('/admin/{id}/update', 'AdminController@update');
 Route::post('/admin/{id}/read', 'AdminController@read');
 Route::post('/admin/{id}/delete', 'AdminController@delete');
 Route::post('/admin/{id}/updatePassword', 'AdminController@updatePassword');
+
+Route::get('/stopword', 'StopwordController@index');
+Route::post('/stopword/data', 'StopwordController@data');
+Route::post('/stopword/store', 'StopwordController@store');
+Route::post('/stopword/{id}/update', 'StopwordController@update');
+Route::post('/stopword/{id}/read', 'StopwordController@read');
+Route::post('/stopword/{id}/delete', 'StopwordController@delete');
+Route::post('/stopword/{id}/updatePassword', 'StopwordController@updatePassword');

@@ -24,7 +24,7 @@ class AdminController extends Controller
           2 => 'username',
           3 => 'id',
 
-    );
+        );
 
       	$limit = $request->input('length');
         $start = $request->input('start');
@@ -56,8 +56,9 @@ class AdminController extends Controller
         }
 
         $data = array();
-        foreach ($admins as $admin)
+        foreach ($admins as $key=>$admin)
         {
+            $nestedData['no'] = $key+1;
             $nestedData['nama'] = $admin->nama;
             $nestedData['level'] = $admin->level==1?'Super Admin':'Admin';
             $nestedData['username'] = $admin->username;

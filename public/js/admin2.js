@@ -47,6 +47,7 @@ function deleteAdmin(id){
   .done(function(data) {
     $('#modal-admin-2 p[name=nama]').text(data.nama);
     $('#modal-admin-2 p[name=level]').text(data.level==1?'Super Admin':'Admin');
+	$('#modal-admin-2 p[name=username]').text(data.username);
   })
   .fail(function() {
     swal({title: 'Gagal', text: 'Terjadi error dalam pengiriman data', buttonsStyling: false, confirmButtonClass: "btn btn-danger", type: "error"});
