@@ -35,4 +35,26 @@ Route::post('/stopword/store', 'StopwordController@store');
 Route::post('/stopword/{id}/update', 'StopwordController@update');
 Route::post('/stopword/{id}/read', 'StopwordController@read');
 Route::post('/stopword/{id}/delete', 'StopwordController@delete');
-Route::post('/stopword/{id}/updatePassword', 'StopwordController@updatePassword');
+
+Route::get('/kamus', 'KamusController@index');
+Route::post('/kamus/data', 'KamusController@data');
+Route::post('/kamus/store', 'KamusController@store');
+Route::post('/kamus/{id}/update', 'KamusController@update');
+Route::post('/kamus/{id}/read', 'KamusController@read');
+Route::post('/kamus/{id}/delete', 'KamusController@delete');
+
+Route::get('/komentar', 'KomentarController@index');
+Route::post('/komentar/data', 'KomentarController@data');
+Route::post('/komentar/store', 'KomentarController@store');
+Route::post('/komentar/{id}/update', 'KomentarController@update');
+Route::post('/komentar/{id}/updateJenisData', 'KomentarController@updateJenisData');
+Route::post('/komentar/{id}/updateSentAwal', 'KomentarController@updateSentAwal');
+Route::post('/komentar/{id}/read', 'KomentarController@read');
+Route::post('/komentar/{id}/delete', 'KomentarController@delete');
+
+Route::get('/training', 'TrainingController@index');
+Route::post('/training/data', 'TrainingController@data');
+Route::post('/training/store', 'TrainingController@store');
+Route::post('/training/{id}/update', 'TrainingController@update');
+Route::post('/training/{id}/read', 'TrainingController@read');
+Route::post('/training/{id}/delete', 'TrainingController@delete');

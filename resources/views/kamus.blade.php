@@ -1,7 +1,7 @@
 @extends('master')
 
-@section('title', config('app.name').' | Stopword')
-@section('header', 'Stopword')
+@section('title', config('app.name').' | kamus')
+@section('header', 'Kamus')
 
 @section('content')
 <div class="row">
@@ -9,19 +9,20 @@
 
 	  <div class="box box-danger">
 	    <div class="box-header">
-	      <h3 class="box-title">Daftar Stopword</h3>
+	      <h3 class="box-title">Daftar Kamus</h3>
 	      <div class="btn-group pull-right">
-	      	<button class="btn btn-primary" onClick="addStopword();"><i class="fa fa-plus"></i>&nbsp&nbsp Tambah Stopword</button>
+	      	<button class="btn btn-primary" onClick="addKamus();"><i class="fa fa-plus"></i>&nbsp&nbsp Tambah kamus</button>
 	      </div>
 	    </div>
 	    <!-- /.box-header -->
 	    <div class="box-body table-responsive">
-	      <table id="table-stopword" class="table table-bordered table-striped">
+	      <table id="table-kamus" class="table table-bordered table-striped">
 	        <thead class="red">
 	        <tr>
                 <th>No.</th>
-	        	<th>Kata</th>
-	        	<th>Aksi</th>
+	        	<th>Kata Singkatan</th>
+	        	<th>Kata Asli</th>
+                <th>Aksi</th>
 	        </tr>
 	        </thead>
 	        <tbody>
@@ -30,8 +31,9 @@
 	        <tfoot>
 	        <tr>
                 <th>No.</th>
-	          	<th>Kata</th>
-	        	<th>Aksi</th>
+	          	<th>Kata Singkatan</th>
+	        	<th>Kata Asli</th>
+                <th>Aksi</th>
 	        </tr>
 	        </tfoot>
 	      </table>
@@ -44,32 +46,33 @@
 </div>
 <!-- /.row -->
 
-@include('modal/modal-stopword')
-@include('modal/modal-stopword2')
+@include('modal/modal-kamus')
+@include('modal/modal-kamus2')
 
 @endsection
 
 @section('script')
-<script src="{{URL('public')}}/js/stopword.js"></script>
-<script src="{{URL('public')}}/js/stopword2.js"></script>
+<script src="{{URL('public')}}/js/kamus.js"></script>
+<script src="{{URL('public')}}/js/kamus2.js"></script>
 <script>
-	var dataTableStopword;
+	var dataTableKamus;
 	$(document).ready(function() {
 		// Aktifkan menu sidebar
-		$('#menu-stopword').addClass('active');
+		$('#menu-kamus').addClass('active');
 
-		dataTableStopword = $('#table-stopword').DataTable({
+		dataTableKamus = $('#table-kamus').DataTable({
 	      "processing": true,
 	      "serverSide": true,
 	      "ajax":{
-				"url": "{{ URL('stopword/data') }}",
+				"url": "{{ URL('kamus/data') }}",
 				"dataType": "json",
 				"type": "POST",
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
 	        { "data": "no" },
-	        { "data": "kata" },
+	        { "data": "kata_singkatan" },
+            { "data": "kata_asli" },
 	        { "data": "aksi", "orderable": false }
 	      ],
 	      "order": [[0, "asc"]]

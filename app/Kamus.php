@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Komentar extends Model
+class Kamus extends Model
 {
     public $timestamps = false;
-    protected $table = 'komentar';
+    protected $table = 'kamus';
 }
