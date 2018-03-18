@@ -54,7 +54,4 @@ Route::post('/komentar/{id}/delete', 'KomentarController@delete');
 
 Route::get('/training', 'TrainingController@index');
 Route::post('/training/data', 'TrainingController@data');
-Route::post('/training/store', 'TrainingController@store');
-Route::post('/training/{id}/update', 'TrainingController@update');
-Route::post('/training/{id}/read', 'TrainingController@read');
-Route::post('/training/{id}/delete', 'TrainingController@delete');
+Route::post('/training/doTraining', 'TrainingController@doTraining');

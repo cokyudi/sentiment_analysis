@@ -72,11 +72,11 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no" },
-	        { "data": "komentar", "width" : "45%" },
-            { "data": "jenis_data" },
-            { "data": "sentimen_awal" },
-	        { "data": "aksi", "orderable": false }
+	        { "data": "no", "width" : "5%" },
+	        { "data": "komentar", "width" : "50%" },
+            { "data": "jenis_data", "width" : "15%" },
+            { "data": "sentimen_awal", "width" : "15%" },
+	        { "data": "aksi", "width" : "15%", "orderable": false }
 	      ],
 	      "order": [[3, "asc"]]
 	  	});
