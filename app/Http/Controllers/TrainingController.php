@@ -101,7 +101,7 @@ class TrainingController extends Controller
             $trainings = $komentar->komentar;
             $id = $komentar->id;
             //Membersihkan Kata
-            $training = strtolower(preg_replace('([.,/123457890])','',$trainings));
+            $training = strtolower(preg_replace('([.,/123457890@])','',$trainings));
             $training = strtolower(preg_replace('([\n\r])',' ',$training));
             //tokenize
             $katass = array_values(array_filter((explode(' ',$training))));

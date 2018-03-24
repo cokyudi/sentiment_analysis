@@ -55,3 +55,14 @@ Route::post('/komentar/{id}/delete', 'KomentarController@delete');
 Route::get('/training', 'TrainingController@index');
 Route::post('/training/data', 'TrainingController@data');
 Route::post('/training/doTraining', 'TrainingController@doTraining');
+
+Route::get('/testing', 'TestingController@index');
+Route::post('/testing/data', 'TestingController@data');
+Route::post('/testing/doTesting', 'TestingController@doTesting');
+
+Route::get('/pengetahuan', 'PengetahuanController@index');
+Route::post('/pengetahuan/data', 'PengetahuanController@data');
+Route::post('/pengetahuan/store', 'PengetahuanController@store');
+Route::post('/pengetahuan/{id}/update', 'PengetahuanController@update');
+Route::post('/pengetahuan/{id}/read', 'PengetahuanController@read');
+Route::post('/pengetahuan/{id}/delete', 'PengetahuanController@delete');
