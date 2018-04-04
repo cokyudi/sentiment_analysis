@@ -127,18 +127,41 @@ class TrainingController extends Controller
             //stemming
             $stemmerFactory = new \Sastrawi\Stemmer\StemmerFactory;
             $stemmer  = $stemmerFactory->createStemmer();
-            $sentence = implode(' ',array_values(array_filter($data2)));
+            $sentence = implode(' ',array_values(array_unique(array_filter($data2))));
             $output = $stemmer->stem($sentence);
             //simpan hasil preproccessing
             $text_prc = Komentar::find($id);
             $text_prc->text_prc = $output;
             $text_prc->save();
-            //seleksi fitur chi-square
 
             //$data[] = $output;
         }
         //Seleksi Fitur Chisquare
+        //APAKAH KATA PADA DOKUMEN DIBUAT UNIK DAHULU ?????
+
         $fiturs = Komentar::where('jenis_data','0')->get();
+        $v = 0; //jumlah seluruh kata pada data training
+
+        //mencari jumlah sluruh kata pada data training
+        foreach ($fiturs as $key => $fitur) {
+            $prepros = $fitur->text_prc;
+            $ts = explode(' ',$prepros);
+            $countTs = count($ts);
+            $v = $v + $countTs;
+        }
+
+        //mencari jumlah sluruh kata di kelas tertentu pada data training
+        $cs = array(); //jumlah seluruh kata untuk satu kelas di data training
+        for ($k=0; $k<3 ; $k++) {
+            $fiturs2 = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->get();
+            $cs[$k] = 0;
+            foreach ($fiturs2 as $key => $fitur2) {
+                $prepros2 = $fitur2->text_prc;
+                $ts2 = explode(' ',$prepros2);
+                $countTs2 = count($ts2);
+                $cs[$k] = $cs[$k] + $countTs2;
+            }
+        }
 
         foreach ($fiturs as $fitur) {
 
@@ -147,13 +170,14 @@ class TrainingController extends Controller
             $data3 = array();
             $x = array();
             $hasil = array();
+            $ptn=array();
             foreach ($ts as $key=>$t) {
                 $cekKata = Pengetahuan::where('kata',$t)->count();
+
                 if($cekKata){
                     continue;
                 }
                 else{
-                    // $A=array();
                     for($k=0;$k<3;$k++){
                         $N = Komentar::where('jenis_data','0')->count(); //seluruh data training
                         $A = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->where('text_prc','LIKE',"%$t%")->count(); // data ber kelas $k yg memuat kata $t
@@ -177,14 +201,25 @@ class TrainingController extends Controller
                         $penyebut = $AC*$BD*$AB*$CD;
 
                         $x[$key][$k] = $pembilang/$penyebut;
+
+                        //hitung Probabilitas kata ke-n dengan diketahui kelas $k
+                        $pembilang2 = $A + 1;
+                        $penyebut2 = $cs[$k] + $v;
+                        $ptn[$key][$k] = $pembilang2/$penyebut2;
                     }
                     $hasil[$key] = 0;
                     for ($k=0; $k<3 ; $k++) {
                         $hasil[$key] = $hasil[$key]+$x[$key][$k];
                     }
+                    $freqKata = Komentar::where('jenis_data','0')->where('text_prc','LIKE',"%$t%")->count();
+
                     $pengetahuan = new Pengetahuan;
                     $pengetahuan->kata = $t;
-                    $pengetahuan->nilai = $hasil[$key];
+                    $pengetahuan->frekuensi = $freqKata;
+                    $pengetahuan->n_chisquare = $hasil[$key];
+                    $pengetahuan->n_netral = $ptn[$key][0];
+                    $pengetahuan->n_positif = $ptn[$key][1];
+                    $pengetahuan->n_negatif = $ptn[$key][2];
                     $pengetahuan->save();
 
                     $data3[] = $hasil;
@@ -196,7 +231,7 @@ class TrainingController extends Controller
         if($data){
             $response = array(
     	  		'status' => 'OK',
-    	  		'message' => $data
+    	  		'message' => $ptn
     	  	);
         }
         else {

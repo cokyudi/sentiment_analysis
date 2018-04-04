@@ -16,8 +16,32 @@
           </div>
           <div class="col-sm-12">
             <div class="form-group">
-              <label>Nilai</label>
-              <p name="nilai"></p>
+              <label>Frekuensi</label>
+              <p name="frekuensi"></p>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Chisquare</label>
+              <p name="n_chisquare"></p>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Netral</label>
+              <p name="n_netral"></p>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Positif</label>
+              <p name="n_positif"></p>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label>Negatif</label>
+              <p name="n_negatif"></p>
             </div>
           </div>
         </div>

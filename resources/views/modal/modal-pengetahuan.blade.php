@@ -18,8 +18,32 @@
             </div>
             <div class="col-sm-12">
               <div class="form-group">
-                <label>Nilai</label>
-                <input type="text" name="nilai" class="form-control" required="true">
+                <label>Frekuensi</label>
+                <input type="text" name="frekuensi" class="form-control" required="true">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Chisquare</label>
+                <input type="text" name="n_chisquare" class="form-control" required="true">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Netral</label>
+                <input type="text" name="n_netral" class="form-control" required="true">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Positif</label>
+                <input type="text" name="n_positif" class="form-control" required="true">
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label>Negatif</label>
+                <input type="text" name="n_negatif" class="form-control" required="true">
               </div>
             </div>
           </div>

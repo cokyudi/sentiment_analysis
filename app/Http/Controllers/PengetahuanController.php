@@ -19,8 +19,12 @@ class PengetahuanController extends Controller
 	    $columns = array(
 
           0 =>'kata',
-          1 =>'nilai',
-          2 =>'id',
+          1 =>'frekuensi',
+          2 =>'n_chisquare',
+          3 =>'n_netral',
+          4 =>'n_positif',
+          5 =>'n_negatif',
+          6 =>'id',
 
         );
 
@@ -58,7 +62,11 @@ class PengetahuanController extends Controller
         {
             $nestedData['no'] = $key+1;
             $nestedData['kata'] = $pengetahuan->kata;
-            $nestedData['nilai'] = $pengetahuan->nilai;
+            $nestedData['frekuensi'] = $pengetahuan->frekuensi;
+            $nestedData['n_chisquare'] = $pengetahuan->n_chisquare;
+            $nestedData['n_netral'] = $pengetahuan->n_netral;
+            $nestedData['n_positif'] = $pengetahuan->n_positif;
+            $nestedData['n_negatif'] = $pengetahuan->n_negatif;
             $nestedData['aksi'] = "<div class='btn-group'>
     					<button class='btn btn-success' onClick='editPengetahuan($pengetahuan->id)'><i class='fa fa-pencil'></i>&nbsp&nbsp Ubah</button>
                         <button class='btn btn-danger' onClick='deletePengetahuan($pengetahuan->id)'><i class='fa fa-trash'></i>&nbsp&nbsp Hapus</button>
@@ -81,7 +89,11 @@ class PengetahuanController extends Controller
     public function store(Request $request){
       	$pengetahuan = new Pengetahuan;
       	$pengetahuan->kata = $request->input('kata');
-        $pengetahuan->nilai = $request->input('nilai');
+        $pengetahuan->frekuensi = $request->input('frekuensi');
+        $pengetahuan->n_chisquare = $request->input('n_chisquare');
+        $pengetahuan->n_netral = $request->input('n_netral');
+        $pengetahuan->n_positif = $request->input('n_positif');
+        $pengetahuan->n_negatif = $request->input('n_negatif');
 
       	if($pengetahuan->save()){
     	  	$response = array(
@@ -107,7 +119,11 @@ class PengetahuanController extends Controller
     public function update(Request $request, $id){
       	$pengetahuan = Pengetahuan::find($id);
       	$pengetahuan->kata = $request->input('kata');
-        $pengetahuan->nilai = $request->input('nilai');
+        $pengetahuan->frekuensi = $request->input('frekuensi');
+        $pengetahuan->n_chisquare = $request->input('n_chisquare');
+        $pengetahuan->n_netral = $request->input('n_netral');
+        $pengetahuan->n_positif = $request->input('n_positif');
+        $pengetahuan->n_negatif = $request->input('n_negatif');
 
       	if($pengetahuan->save()){
     	  	$response = array(

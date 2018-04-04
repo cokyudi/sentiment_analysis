@@ -29,7 +29,11 @@ function editPengetahuan(id){
   })
   .done(function(data) {
     $('#modal-pengetahuan input[name=kata]').val(data.kata);
-    $('#modal-pengetahuan input[name=nilai]').val(data.nilai);
+    $('#modal-pengetahuan input[name=frekuensi]').val(data.frekuensi);
+    $('#modal-pengetahuan input[name=n_chisquare]').val(data.n_chisquare);
+    $('#modal-pengetahuan input[name=n_netral]').val(data.n_netral);
+    $('#modal-pengetahuan input[name=n_positif]').val(data.n_positif);
+    $('#modal-pengetahuan input[name=n_negatif]').val(data.n_negatif);
   })
   .fail(function() {
     swal({title: 'Gagal', text: 'Terjadi error dalam pengiriman data', buttonsStyling: false, confirmButtonClass: "btn btn-danger", type: "error"});

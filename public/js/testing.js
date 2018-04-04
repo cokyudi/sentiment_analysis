@@ -31,7 +31,7 @@ $('#modal-testing form').validate({
       if(data.status==='OK'){
         swal({title: 'Sukses!', text: JSON.stringify(data.message), buttonsStyling: false, confirmButtonClass: "btn btn-success", type: "success"});
         if (typeof dataTableTesting !== 'undefined') {
-          dataTabletesting.ajax.reload();
+          dataTableTesting.ajax.reload();
         }
       }
       else{

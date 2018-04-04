@@ -21,7 +21,11 @@
 	        <tr>
                 <th>No.</th>
 	        	<th>Kata</th>
-                <th>Nilai</th>
+                <th>Frekuensi</th>
+                <th>Chisquare</th>
+                <th>Netral</th>
+                <th>Positif</th>
+                <th>Negatif</th>
 	        	<th>Aksi</th>
 	        </tr>
 	        </thead>
@@ -32,7 +36,11 @@
 	        <tr>
                 <th>No.</th>
 	          	<th>Kata</th>
-                <th>Nilai</th>
+                <th>Frekuensi</th>
+                <th>Chisquare</th>
+                <th>Netral</th>
+                <th>Positif</th>
+                <th>Negatif</th>
 	        	<th>Aksi</th>
 	        </tr>
 	        </tfoot>
@@ -72,7 +80,11 @@
 	      "columns": [
 	        { "data": "no" },
 	        { "data": "kata" },
-            { "data": "nilai" },
+            { "data": "frekuensi" },
+            { "data": "n_chisquare" },
+            { "data": "n_netral" },
+            { "data": "n_positif" },
+            { "data": "n_negatif" },
 	        { "data": "aksi", "orderable": false }
 	      ],
 	      "order": [[1, "desc"]]

@@ -15,6 +15,18 @@
                   <p>Proses testing membutuhkan waktu yang lama.</p>
                 </div>
             </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Threshold</label>
+                    <select name="threshold" id="threshold" class="form-control" required>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+                </div>
+            </div>
           </div>
           {{ csrf_field() }}
     		</form>

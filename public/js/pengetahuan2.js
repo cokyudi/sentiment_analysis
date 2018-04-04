@@ -17,7 +17,11 @@ function deletePengetahuan(id){
   })
   .done(function(data) {
     $('#modal-pengetahuan-2 p[name=kata]').text(data.kata);
-    $('#modal-pengetahuan-2 p[name=nilai]').text(data.nilai);
+    $('#modal-pengetahuan-2 p[name=frekuensi]').text(data.frekuensi);
+    $('#modal-pengetahuan-2 p[name=n_chisquare]').text(data.n_chisquare);
+    $('#modal-pengetahuan-2 p[name=n_netral]').text(data.n_netral);
+    $('#modal-pengetahuan-2 p[name=n_positif]').text(data.n_positif);
+    $('#modal-pengetahuan-2 p[name=n_negatif]').text(data.n_negatif);
   })
   .fail(function() {
     swal({title: 'Gagal', text: 'Terjadi error dalam pengiriman data', buttonsStyling: false, confirmButtonClass: "btn btn-danger", type: "error"});

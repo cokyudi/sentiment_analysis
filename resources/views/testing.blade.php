@@ -22,7 +22,8 @@
                 <th>No.</th>
 	        	<th>Komentar</th>
 	        	<th>Text Processing</th>
-                <th>Sentimen Awal</th>
+                <th>Sentimen Pakar</th>
+				<th>Sentimen Sistem</th>
 	        </tr>
 	        </thead>
 	        <tbody>
@@ -33,7 +34,8 @@
                 <th>No.</th>
 	        	<th>Komentar</th>
 	        	<th>Text Processing</th>
-                <th>Sentimen Awal</th>
+                <th>Sentimen Pakar</th>
+				<th>Sentimen Sistem</th>
 	        </tr>
 	        </tfoot>
 	      </table>
@@ -71,11 +73,12 @@
 	      },
 	      "columns": [
 	        { "data": "no", "width" : "5%" },
-	        { "data": "komentar", "width" : "55%" },
-            { "data": "text_prc", "width" : "30%" },
-            { "data": "sentimen_awal", "width" : "10%" }
+	        { "data": "komentar", "width" : "46%" },
+            { "data": "text_prc", "width" : "25%" },
+            { "data": "sentimen_awal", "width" : "12%" },
+			{ "data": "sentimen_akhir", "width" : "12%" }
 	      ],
-	      "order": [[3, "asc"]]
+	      "order": [[4, "asc"]]
 	  	});
 
 	});
