@@ -62,35 +62,25 @@ class TestingController extends Controller
         $data = array();
         foreach ($komentars as $key=>$komentar)
         {
-            $selectAwal1='';
-            $selectAwal2='';
-            $selectAwal3='';
+            $selectAwal='';
+            $classLabel1='';
 
-            $selectAkhir1='';
-            $selectAkhir2='';
-            $selectAkhir3='';
+            $selectAkhir='';
+            $classLabel2='';
 
-            if($komentar->sentimen_awal==0){$selectAwal1='selected'; $selectAwal2=''; $selectAwal3='';}
-            else if($komentar->sentimen_awal==1){$selectAwal1=''; $selectAwal2='selected'; $selectAwal3='';}
-            else if($komentar->sentimen_awal==2){$selectAwal1=''; $selectAwal2=''; $selectAwal3='selected';}
+            if($komentar->sentimen_awal==0){$selectAwal='Netral'; $classLabel1='label-default';}
+            else if($komentar->sentimen_awal==1){$selectAwal='Positif'; $classLabel1='label-success';}
+            else if($komentar->sentimen_awal==2){$selectAwal='Negatif'; $classLabel1='label-danger';}
 
-            if($komentar->sentimen_akhir==0){$selectAkhir1='selected'; $selectAkhir2=''; $selectAkhir3='';}
-            else if($komentar->sentimen_akhir==1){$selectAkhir1=''; $selectAkhir2='selected'; $selectAkhir3='';}
-            else if($komentar->sentimen_akhir==2){$selectAkhir1=''; $selectAkhir2=''; $selectAkhir3='selected';}
+            if($komentar->sentimen_akhir==0){$selectAkhir='Netral'; $classLabel2='label-default';}
+            else if($komentar->sentimen_akhir==1){$selectAkhir='Positif'; $classLabel2='label-success';}
+            else if($komentar->sentimen_akhir==2){$selectAkhir='Negatif'; $classLabel2='label-danger';}
 
             $nestedData['no'] = $key+1;
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['text_prc'] = $komentar->text_prc;
-            $nestedData['sentimen_awal'] = "<select disabled onChange='changeSentAwal($komentar->id)' id='selectSentAwal-$komentar->id' name='sentimen_awal' class='form-control' required='true' style='width: 100%;'>
-                    <option $selectAwal1 value='0'>Netral</option>
-                    <option $selectAwal2 value='1'>Positif</option>
-                    <option $selectAwal3 value='2'>Negatif</option>
-                    </select>";
-            $nestedData['sentimen_akhir'] = "<select disabled name='sentimen_akhir' class='form-control' required='true' style='width: 100%;'>
-                    <option $selectAkhir1 value='0'>Netral</option>
-                    <option $selectAkhir2 value='1'>Positif</option>
-                    <option $selectAkhir3 value='2'>Negatif</option>
-                    </select>";
+            $nestedData['sentimen_awal'] = "<span class='label $classLabel1'>$selectAwal</span>";
+            $nestedData['sentimen_akhir'] = "<span class='label $classLabel2'>$selectAkhir</span>";
             $data[] = $nestedData;
 
         }

@@ -70,10 +70,10 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no", "width" : "5%" },
-	        { "data": "komentar", "width" : "55%" },
-            { "data": "text_prc", "width" : "30%" },
-            { "data": "sentimen_awal", "width" : "10%" }
+	        { "data": "no"},
+	        { "data": "komentar"},
+            { "data": "text_prc"},
+            { "data": "sentimen_awal"}
 	      ],
 	      "order": [[3, "asc"]]
 	  	});

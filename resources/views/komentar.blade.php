@@ -11,7 +11,7 @@
 	    <div class="box-header">
 	      <h3 class="box-title">Daftar Komentar</h3>
 	      <div class="btn-group pull-right">
-	      	<button class="btn btn-primary" onClick="addkomentar();"><i class="fa fa-plus"></i>&nbsp&nbsp Tambah komentar</button>
+	      	<button class="btn btn-primary" onClick="addKomentar();"><i class="fa fa-plus"></i>&nbsp&nbsp Tambah komentar</button>
 	      </div>
 	    </div>
 	    <!-- /.box-header -->
@@ -72,11 +72,11 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no", "width" : "5%" },
-	        { "data": "komentar", "width" : "50%" },
-            { "data": "jenis_data", "width" : "15%" },
-            { "data": "sentimen_awal", "width" : "15%" },
-	        { "data": "aksi", "width" : "15%", "orderable": false }
+	        { "data": "no"},
+	        { "data": "komentar", "width" : "40%" },
+            { "data": "jenis_data"},
+            { "data": "sentimen_awal"},
+	        { "data": "aksi","orderable": false }
 	      ],
 	      "order": [[3, "asc"]]
 	  	});

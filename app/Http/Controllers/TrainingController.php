@@ -61,22 +61,17 @@ class TrainingController extends Controller
         $data = array();
         foreach ($komentars as $key=>$komentar)
         {
-            $selectAwal1='';
-            $selectAwal2='';
-            $selectAwal3='';
+            $selectAwal='';
+            $classLabel='';
 
-            if($komentar->sentimen_awal==0){$selectAwal1='selected'; $selectAwal2=''; $selectAwal3='';}
-            else if($komentar->sentimen_awal==1){$selectAwal1=''; $selectAwal2='selected'; $selectAwal3='';}
-            else if($komentar->sentimen_awal==2){$selectAwal1=''; $selectAwal2=''; $selectAwal3='selected';}
+            if($komentar->sentimen_awal==0){$selectAwal='Netral'; $classLabel='label-default';}
+            else if($komentar->sentimen_awal==1){$selectAwal='Positif'; $classLabel='label-success';}
+            else if($komentar->sentimen_awal==2){$selectAwal='Negatif'; $classLabel='label-danger';}
 
             $nestedData['no'] = $key+1;
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['text_prc'] = $komentar->text_prc;
-            $nestedData['sentimen_awal'] = "<select disabled onChange='changeSentAwal($komentar->id)' id='selectSentAwal-$komentar->id' name='sentimen_awal' class='form-control' required='true' style='width: 100%;'>
-                    <option $selectAwal1 value='0'>Netral</option>
-                    <option $selectAwal2 value='1'>Positif</option>
-                    <option $selectAwal3 value='2'>Negatif</option>
-                  </select>";
+            $nestedData['sentimen_awal'] = "<span class='label $classLabel'>$selectAwal</span>";
             $data[] = $nestedData;
 
         }
@@ -179,11 +174,12 @@ class TrainingController extends Controller
                 }
                 else{
                     for($k=0;$k<3;$k++){
+
                         $N = Komentar::where('jenis_data','0')->count(); //seluruh data training
-                        $A = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->where('text_prc','LIKE',"%$t%")->count(); // data ber kelas $k yg memuat kata $t
-                        $B = Komentar::where('jenis_data','0')->where('sentimen_awal','!=', $k)->where('text_prc','LIKE',"%$t%")->count(); // data selain kelas $k yg memuat kata $t
-                        $C = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->where('text_prc','NOT LIKE',"%$t%")->count(); // data ber kelas $k yg tidak memuat kata $t
-                        $D = Komentar::where('jenis_data','0')->where('sentimen_awal','!=', $k)->where('text_prc','NOT LIKE',"%$t%")->count(); // data selain kelas $k yg tidak memuat kata $t
+                        $A = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->where('text_prc','REGEXP','[[:<:]]'.$t.'[[:>:]]')->count(); // data ber kelas $k yg memuat kata $t
+                        $B = Komentar::where('jenis_data','0')->where('sentimen_awal','!=', $k)->where('text_prc','REGEXP','[[:<:]]'.$t.'[[:>:]]')->count(); // data selain kelas $k yg memuat kata $t
+                        $C = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->where('text_prc','NOT REGEXP','[[:<:]]'.$t.'[[:>:]]')->count(); // data ber kelas $k yg tidak memuat kata $t
+                        $D = Komentar::where('jenis_data','0')->where('sentimen_awal','!=', $k)->where('text_prc','NOT REGEXP','[[:<:]]'.$t.'[[:>:]]')->count(); // data selain kelas $k yg tidak memuat kata $t
 
                         $AD = $A*$D;
                         $BC = $B*$C;
@@ -211,7 +207,7 @@ class TrainingController extends Controller
                     for ($k=0; $k<3 ; $k++) {
                         $hasil[$key] = $hasil[$key]+$x[$key][$k];
                     }
-                    $freqKata = Komentar::where('jenis_data','0')->where('text_prc','LIKE',"%$t%")->count();
+                    $freqKata = Komentar::where('jenis_data',0)->where('text_prc','REGEXP','[[:<:]]'.$t.'[[:>:]]')->count();
 
                     $pengetahuan = new Pengetahuan;
                     $pengetahuan->kata = $t;
@@ -231,7 +227,7 @@ class TrainingController extends Controller
         if($data){
             $response = array(
     	  		'status' => 'OK',
-    	  		'message' => $ptn
+    	  		'message' => $data
     	  	);
         }
         else {

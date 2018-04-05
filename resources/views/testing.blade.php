@@ -62,7 +62,7 @@
 		// Aktifkan menu sidebar
 		$('#menu-testing').addClass('active');
 
-		dataTabletesting = $('#table-testing').DataTable({
+		dataTableTesting = $('#table-testing').DataTable({
 	      "processing": true,
 	      "serverSide": true,
 	      "ajax":{
@@ -72,11 +72,11 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no", "width" : "5%" },
-	        { "data": "komentar", "width" : "46%" },
-            { "data": "text_prc", "width" : "25%" },
-            { "data": "sentimen_awal", "width" : "12%" },
-			{ "data": "sentimen_akhir", "width" : "12%" }
+	        { "data": "no"},
+	        { "data": "komentar"},
+            { "data": "text_prc"},
+            { "data": "sentimen_awal"},
+			{ "data": "sentimen_akhir"}
 	      ],
 	      "order": [[4, "asc"]]
 	  	});
