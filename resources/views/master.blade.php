@@ -95,9 +95,9 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li id="menu-komentar">
-          <a href="{{URL('komentar')}}">
-            <i class="fa fa-commenting"></i> <span>Komentar</span>
+        <li id="menu-pengaduan">
+          <a href="{{URL('pengaduan')}}">
+            <i class="fa fa-exclamation-triangle"></i> <span>Pengaduan</span>
           </a>
         </li>
         <li id="menu-laporan">
@@ -106,6 +106,11 @@
           </a>
         </li>
         @if(session()->get('admin')['level'] == 1)
+        <li id="menu-komentar">
+          <a href="{{URL('komentar')}}">
+            <i class="fa fa-commenting"></i> <span>Komentar</span>
+          </a>
+        </li>
         <li id="menu-admin">
           <a href="{{URL('admin')}}">
             <i class="fa fa-user"></i> <span>Admin</span>

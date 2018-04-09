@@ -66,3 +66,10 @@ Route::post('/pengetahuan/store', 'PengetahuanController@store');
 Route::post('/pengetahuan/{id}/update', 'PengetahuanController@update');
 Route::post('/pengetahuan/{id}/read', 'PengetahuanController@read');
 Route::post('/pengetahuan/{id}/delete', 'PengetahuanController@delete');
+
+Route::get('/pengaduan', 'PengaduanController@index');
+Route::post('/pengaduan/data', 'PengaduanController@data');
+Route::post('/pengaduan/store', 'PengaduanController@store');
+Route::post('/pengaduan/{id}/update', 'PengaduanController@update');
+Route::post('/pengaduan/{id}/read', 'PengaduanController@read');
+Route::post('/pengaduan/{id}/delete', 'PengaduanController@delete');

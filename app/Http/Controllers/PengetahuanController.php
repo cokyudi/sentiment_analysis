@@ -17,7 +17,6 @@ class PengetahuanController extends Controller
 
     public function data(Request $request){
 	    $columns = array(
-
           0 =>'kata',
           1 =>'frekuensi',
           2 =>'n_chisquare',
@@ -25,7 +24,6 @@ class PengetahuanController extends Controller
           4 =>'n_positif',
           5 =>'n_negatif',
           6 =>'id',
-
         );
 
       	$limit = $request->input('length');
@@ -83,7 +81,6 @@ class PengetahuanController extends Controller
         );
 
         return response()->json($response);
-
     }
 
     public function store(Request $request){
