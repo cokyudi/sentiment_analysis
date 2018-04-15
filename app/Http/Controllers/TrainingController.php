@@ -68,7 +68,7 @@ class TrainingController extends Controller
             else if($komentar->sentimen_awal==1){$selectAwal='Positif'; $classLabel='label-success';}
             else if($komentar->sentimen_awal==2){$selectAwal='Negatif'; $classLabel='label-danger';}
 
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['text_prc'] = $komentar->text_prc;
             $nestedData['sentimen_awal'] = "<span class='label $classLabel'>$selectAwal</span>";

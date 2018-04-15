@@ -62,15 +62,20 @@ class PengaduanController extends Controller
         $data = array();
         foreach ($komentars as $key=>$komentar)
         {
-            $nestedData['no'] = $key+1;
-            $nestedData['peng_topik'] = $komentar->peng_topik;
+            $selectAwal = '';
+            $classLabel = '';
+            $sentimen = $komentar->jenis_data==1?$komentar->sentimen_akhir:$komentar->sentimen_awal;
+            if($sentimen==0){$selectAwal='Netral'; $classLabel='label-default';}
+            else if($sentimen==1){$selectAwal='Positif'; $classLabel='label-success';}
+            else if($sentimen==2){$selectAwal='Negatif'; $classLabel='label-danger';}
+
+            $nestedData['no'] = $start+$key+1;
+            $nestedData['peng_topik'] = "<b>$komentar->peng_topik</b>";
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['pengtg_tgl'] = $komentar->pengtg_tgl;
-            $nestedData['sentimen'] = $komentar->jenis_data==1?$komentar->sentimen_akhir:$komentar->sentimen_awal;
-            $nestedData['aksi'] = "<div class='btn-group'>
-    					<button class='btn btn-success' onClick='detailPengaduan($komentar->idp)'><i class='fa fa-pencil'></i>&nbsp&nbsp Detail</button>
-                        <button class='btn btn-danger' onClick='deleteKomentar($komentar->idk)'><i class='fa fa-trash'></i>&nbsp&nbsp Hapus</button>
-            </div>";
+            $nestedData['sentimen'] = "<span class='label $classLabel'>$selectAwal</span>";
+            $nestedData['aksi'] = "<button class='btn btn-success' onClick='detailPengaduan($komentar->idp)'><i class='fa fa-pencil'></i>&nbsp&nbsp Detail</button>
+                        <button class='btn btn-danger' onClick='deleteKomentar($komentar->idk)'><i class='fa fa-trash'></i>&nbsp&nbsp Hapus</button>";
             $data[] = $nestedData;
         }
 
@@ -82,5 +87,10 @@ class PengaduanController extends Controller
         );
 
         return response()->json($response);
+    }
+
+    public function read(Request $request, $id){
+      	$data = Pengaduan::join('pengaduan_tindaklanjut','pengaduan.id','=','pengaduan_tindaklanjut.peng_id')->find($id);
+      	return response()->json($data);
     }
 }

@@ -58,7 +58,7 @@ class PengetahuanController extends Controller
         $data = array();
         foreach ($pengetahuans as $key=>$pengetahuan)
         {
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;
             $nestedData['kata'] = $pengetahuan->kata;
             $nestedData['frekuensi'] = $pengetahuan->frekuensi;
             $nestedData['n_chisquare'] = $pengetahuan->n_chisquare;

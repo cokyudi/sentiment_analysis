@@ -56,7 +56,7 @@ class KamusController extends Controller
         $data = array();
         foreach ($kamuss as $key=>$kamus)
         {
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;;
             $nestedData['kata_singkatan'] = $kamus->kata_singkatan;
             $nestedData['kata_asli'] = $kamus->kata_asli;
             $nestedData['aksi'] = "<div class='btn-group'>

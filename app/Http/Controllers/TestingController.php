@@ -7,6 +7,7 @@ use App\Komentar;
 use App\Kamus;
 use App\Stopword;
 use App\Pengetahuan;
+use App\LogTesting;
 use \Sastrawi\Stemmer\StemmerFactory;
 
 class TestingController extends Controller
@@ -76,7 +77,7 @@ class TestingController extends Controller
             else if($komentar->sentimen_akhir==1){$selectAkhir='Positif'; $classLabel2='label-success';}
             else if($komentar->sentimen_akhir==2){$selectAkhir='Negatif'; $classLabel2='label-danger';}
 
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['text_prc'] = $komentar->text_prc;
             $nestedData['sentimen_awal'] = "<span class='label $classLabel1'>$selectAwal</span>";
@@ -146,10 +147,11 @@ class TestingController extends Controller
         //Algoritma Boolean Multinomial Naive Bayes
         $fiturs = Komentar::where('jenis_data','1')->get();
         $threshold = $request->input('threshold');
-
+        $cocok = 0;
         foreach ($fiturs as $key => $fitur) {
 
             $id = $fitur->id;
+            $awal = $fitur->sentimen_awal;
 
             $prepros = $fitur->text_prc;
             $ts = explode(' ',$prepros);
@@ -192,8 +194,19 @@ class TestingController extends Controller
             $updateAkhir = Komentar::find($id);
             $updateAkhir->sentimen_akhir = array_search(max($probKomentar),$probKomentar);
             $updateAkhir->save();
+
+            if($awal==array_search(max($probKomentar),$probKomentar)){
+              $cocok++;
+            }
         }
         $data[] = $data2;
+        $logTesting = new LogTesting;
+        $logTesting->threshold = $threshold;
+        $logTesting->total_data = count($fiturs);
+        $logTesting->cocok = $cocok;
+        $logTesting->akurasi = ($cocok/count($fiturs))*100;
+        $logTesting->tgl_log = date("Y-m-d H:i:s");
+        $logTesting->save();
 
         if($data){
             $response = array(
@@ -204,7 +217,7 @@ class TestingController extends Controller
         else {
             $response = array(
     	  		'status' => 'error',
-    	  		'message' => 'Training gagal'
+    	  		'message' => 'Testing gagal'
     	  	);
         }
         return response()->json($response);

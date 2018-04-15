@@ -55,7 +55,7 @@ class StopwordController extends Controller
         $data = array();
         foreach ($stopwords as $key=>$stopword)
         {
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;
             $nestedData['kata'] = $stopword->kata;
             $nestedData['aksi'] = "<div class='btn-group'>
     					<button class='btn btn-success' onClick='editStopword($stopword->id)'><i class='fa fa-pencil'></i>&nbsp&nbsp Ubah</button>

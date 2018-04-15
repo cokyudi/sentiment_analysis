@@ -71,7 +71,7 @@ class KomentarController extends Controller
             else if($komentar->sentimen_awal==1){$selectAwal1=''; $selectAwal2='selected'; $selectAwal3='';}
             else if($komentar->sentimen_awal==2){$selectAwal1=''; $selectAwal2=''; $selectAwal3='selected';}
 
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['jenis_data'] = "<select onChange='changeJenisData($komentar->id)' id='selectJenisData-$komentar->id' name='jenis_data' class='form-control' required='true' style='width: 100%;'>
                     <option $selectData1 value='0'>Training</option>
@@ -176,13 +176,13 @@ class KomentarController extends Controller
       	if($komentar->save()){
     	  	$response = array(
     	  		'status' => 'OK',
-    	  		'message' => 'Jenis data berhasil diperbaharui'
+    	  		'message' => 'Sentimen Awal berhasil diperbaharui'
     	  	);
       	}
       	else{
       		$response = array(
     	  		'status' => 'error',
-    	  		'message' => 'Jenis data gagal diperbaharui'
+    	  		'message' => 'Sentimen Awal gagal diperbaharui'
     	  	);
       	}
 

@@ -9,7 +9,12 @@ use App\Admin;
 class AuthController extends Controller
 {
     public function login(Request $request){
-    	return view('login');
+      if(Auth::user()){
+        return redirect('dashboard');
+      }
+      else {
+    	  return view('login');
+      }
     }
 
     public function logout(Request $request){

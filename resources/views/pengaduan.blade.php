@@ -47,14 +47,14 @@
 </div>
 <!-- /.row -->
 
-<!-- @include('modal/modal-pengaduan')
-@include('modal/modal-pengaduan2') -->
+@include('modal/modal-pengaduan')
+@include('modal/modal-pengaduan2')
 
 @endsection
 
 @section('script')
-<!-- <script src="{{URL('public')}}/js/pengaduan.js"></script>
-<script src="{{URL('public')}}/js/pengaduan2.js"></script> -->
+<script src="{{URL('public')}}/js/pengaduan.js"></script>
+<script src="{{URL('public')}}/js/pengaduan2.js"></script>
 <script>
 	var dataTablePengaduan;
 	$(document).ready(function() {

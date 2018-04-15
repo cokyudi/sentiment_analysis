@@ -58,7 +58,7 @@ class AdminController extends Controller
         $data = array();
         foreach ($admins as $key=>$admin)
         {
-            $nestedData['no'] = $key+1;
+            $nestedData['no'] = $start+$key+1;
             $nestedData['nama'] = $admin->nama;
             $nestedData['level'] = $admin->level==1?'Super Admin':'Admin';
             $nestedData['username'] = $admin->username;
