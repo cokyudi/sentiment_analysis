@@ -10,9 +10,6 @@
 	  <div class="box box-danger">
 	    <div class="box-header">
 	      <h3 class="box-title">Daftar Komentar</h3>
-	      <div class="btn-group pull-right">
-	      	<button class="btn btn-primary" onClick="addKomentar();"><i class="fa fa-plus"></i>&nbsp&nbsp Tambah komentar</button>
-	      </div>
 	    </div>
 	    <!-- /.box-header -->
 	    <div class="box-body table-responsive">
@@ -20,8 +17,8 @@
 	        <thead class="red">
 	        <tr>
                 <th>No.</th>
-	        	<th>Komentar</th>
-	        	<th>Jenis Data</th>
+	        			<th>Komentar</th>
+	        			<th>Jenis Data</th>
                 <th>Sentimen Awal</th>
                 <th>Aksi</th>
 	        </tr>
@@ -32,8 +29,8 @@
 	        <tfoot>
 	        <tr>
                 <th>No.</th>
-	        	<th>Komentar</th>
-	        	<th>Jenis Data</th>
+	        			<th>Komentar</th>
+	        			<th>Jenis Data</th>
                 <th>Sentimen Awal</th>
                 <th>Aksi</th>
 	        </tr>
@@ -72,11 +69,11 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no"},
-	        { "data": "komentar", "width" : "40%" },
+	        	{ "data": "no"},
+	        	{ "data": "komentar", "width" : "40%" },
             { "data": "jenis_data"},
             { "data": "sentimen_awal"},
-	        { "data": "aksi","orderable": false }
+	        	{ "data": "aksi","orderable": false }
 	      ],
 	      "order": [[3, "asc"]]
 	  	});

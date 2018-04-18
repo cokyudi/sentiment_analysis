@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pengaduan;
 use App\Komentar;
+use App\Instansi;
 
 class PengaduanController extends Controller
 {
@@ -13,16 +14,18 @@ class PengaduanController extends Controller
     }
 
     public function index(){
-  	     return view('pengaduan');
+        $data['instansis']=Instansi::get();
+  	    return view('pengaduan',$data);
     }
 
     public function data(Request $request){
 	    $columns = array(
           0 =>'peng_topik',
           1 =>'komentar',
-          2 =>'pengtg_tgl',
-          3 =>'sentimen',
-          4 =>'id'
+          2 =>'peng_instansi',
+          3 =>'pengtg_tgl',
+          4 =>'sentimen',
+          5 =>'id'
         );
 
       	$limit = $request->input('length');
@@ -32,32 +35,163 @@ class PengaduanController extends Controller
 
         $totalData = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')->count();
 
-        if(empty($request->input('search.value')))
+        if(empty($request->input())) //tampilkan semua
         {
           $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
-                    ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
-                    ->offset($start)
-                    ->limit($limit)
+            ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+            ->offset($start)
+            ->limit($limit)
     				->orderBy($order,$dir)
     				->get();
 
           $totalFiltered = $totalData;
         }
-        else {
-          $search = $request->input('search.value');
+        elseif (!empty($request->input())) {
+          if(!empty($request->input('search'))) { //cari berdasarkan search
+            $search = $request->input('search.value');
 
-          $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
-            ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
-            ->where('peng_topik','LIKE',"%{$search}%")
-            ->offset($start)
-            ->limit($limit)
-            ->orderBy($order,$dir)
-            ->get();
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
 
-          $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
-            ->where('peng_topik','LIKE',"%{$search}%")
-            ->count();
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->count();
+          }
+
+          if(!empty($request->input('sentimen'))){  //cari berdasarkan sentimen
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('sentimen_akhir',$sentimen1)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('sentimen_akhir',$sentimen1)
+              ->count();
+          }
+
+          if(!empty($request->input('peng_instansi'))){ //cari berdasarkan instansi
+            $peng_instansi = $request->input('peng_instansi');
+
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_instansi',$peng_instansi)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_instansi',$peng_instansi)
+              ->count();
+          }
+
+          if(!empty($request->input('sentimen')) AND !empty($request->input('search')) AND empty($request->input('peng_instansi'))){ //cari berdasarkan sentimen dan search
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+            $search = $request->input('search.value');
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('sentimen_akhir',$sentimen1)
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('sentimen_akhir',$sentimen1)
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->count();
+          }
+
+          if(!empty($request->input('sentimen')) AND !empty($request->input('peng_instansi')) AND empty($request->input('search'))){
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+            $peng_instansi = $request->input('peng_instansi');
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('sentimen_akhir',$sentimen1)
+              ->where('peng_instansi',$peng_instansi)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('sentimen_akhir',$sentimen1)
+              ->where('peng_instansi',$peng_instansi)
+              ->count();
+          }
+
+          if(empty($request->input('sentimen')) AND !empty($request->input('peng_instansi')) AND !empty($request->input('search'))){
+            $search = $request->input('search.value');
+            $peng_instansi = $request->input('peng_instansi');
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_instansi',$peng_instansi)
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_instansi',$peng_instansi)
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->count();
+          }
+
+          if(!empty($request->input('sentimen')) AND !empty($request->input('peng_instansi')) AND !empty($request->input('search'))){
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+            $search = $request->input('search.value');
+            $peng_instansi = $request->input('peng_instansi');
+            $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
+              ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_instansi',$peng_instansi)
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->where('sentimen_akhir',$sentimen1)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
+              ->where('peng_instansi',$peng_instansi)
+              ->where('peng_topik','LIKE',"%{$search}%")
+              ->where('sentimen_akhir',$sentimen1)
+              ->count();
+          }
+
         }
+
 
         $data = array();
         foreach ($komentars as $key=>$komentar)
@@ -71,6 +205,7 @@ class PengaduanController extends Controller
 
             $nestedData['no'] = $start+$key+1;
             $nestedData['peng_topik'] = "<b>$komentar->peng_topik</b>";
+            $nestedData['peng_instansi'] = "<b>$komentar->peng_instansi</b>";
             $nestedData['komentar'] = $komentar->komentar;
             $nestedData['pengtg_tgl'] = $komentar->pengtg_tgl;
             $nestedData['sentimen'] = "<span class='label $classLabel'>$selectAwal</span>";

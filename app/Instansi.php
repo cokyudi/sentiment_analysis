@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LogTesting extends Model
+class Instansi extends Model
 {
     public $timestamps = false;
-    protected $table = 'log_testing';
+    protected $table = 'instansi';
 }

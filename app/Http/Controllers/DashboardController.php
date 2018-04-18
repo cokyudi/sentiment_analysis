@@ -23,6 +23,6 @@ class DashboardController extends Controller
         $data['positifAkhir'] = Komentar::where('sentimen_akhir',1)->where('jenis_data',1)->count();
         $data['negatifAkhir'] = Komentar::where('sentimen_akhir',2)->where('jenis_data',1)->count();
 
-		return view('dashboard',$data);
+		    return view('dashboard',$data);
     }
 }
