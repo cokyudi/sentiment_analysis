@@ -111,7 +111,7 @@
             { "data": "sentimen" },
 	        { "data": "aksi", "orderable": false }
 	      ],
-	      "order": [[3, "asc"]]
+	      "order": [[4, "asc"]]
 	  	});
 
 			$('#select-sentimen').change(function() {

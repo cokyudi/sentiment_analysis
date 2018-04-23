@@ -201,6 +201,8 @@
 <script src="{{URL('public/template')}}/plugins/jquery-validation/dist/localization/messages_id.js"></script>
 <!-- SweetAlert2 -->
 <script src="{{URL('public/template')}}/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Chartjs -->
+<script src="{{URL('public/template')}}/plugins/chartjs/chart.bundle.js"></script>
 <!-- Select2 -->
 <script src="{{URL('public/template')}}/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- bootstrap datepicker -->

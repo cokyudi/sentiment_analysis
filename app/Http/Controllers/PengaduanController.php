@@ -10,7 +10,7 @@ use App\Instansi;
 class PengaduanController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth.super');
+        $this->middleware('auth.admin');
     }
 
     public function index(){
@@ -20,12 +20,12 @@ class PengaduanController extends Controller
 
     public function data(Request $request){
 	    $columns = array(
-          0 =>'peng_topik',
-          1 =>'komentar',
-          2 =>'peng_instansi',
-          3 =>'pengtg_tgl',
-          4 =>'sentimen',
-          5 =>'id'
+          0 =>'id',
+          1 =>'peng_topik',
+          2 =>'komentar',
+          3 =>'peng_instansi',
+          4 =>'pengtg_tgl',
+          5 =>'sentimen'
         );
 
       	$limit = $request->input('length');

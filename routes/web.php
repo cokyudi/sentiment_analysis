@@ -74,3 +74,6 @@ Route::post('/pengaduan/{id}/read', 'PengaduanController@read');
 Route::post('/pengaduan/{id}/delete', 'PengaduanController@delete');
 
 Route::get('/evaluasi', 'EvaluasiController@index');
+Route::post('/evaluasi/data', 'EvaluasiController@data');
+
+Route::get('/laporan', 'LaporanController@index');

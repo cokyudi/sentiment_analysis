@@ -12,16 +12,25 @@ class EvaluasiController extends Controller
   }
 
   public function index(){
-       return view('evaluasi');
+
+      $data['tNol'] = LogTesting::where('threshold', '0')->max('akurasi');
+      $data['tSatu'] = LogTesting::where('threshold', '1')->max('akurasi');
+      $data['tDua'] = LogTesting::where('threshold', '2')->max('akurasi');
+      $data['tTiga'] = LogTesting::where('threshold', '3')->max('akurasi');
+      $data['tEmpat'] = LogTesting::where('threshold', '4')->max('akurasi');
+      $data['tTerbaik'] = max($data['tNol'],$data['tSatu'],$data['tDua'],$data['tTiga'],$data['tEmpat']);
+
+      return view('evaluasi',$data);
   }
 
   public function data(Request $request){
     $columns = array(
-        0 =>'peng_topik',
-        1 =>'komentar',
-        2 =>'pengtg_tgl',
-        3 =>'sentimen',
-        4 =>'id'
+        0 =>'threshold',
+        1 =>'total_data',
+        2 =>'cocok',
+        3 =>'tgl_log',
+        4 =>'akurasi',
+        5 =>'id'
       );
 
       $limit = $request->input('length');
@@ -29,52 +38,40 @@ class EvaluasiController extends Controller
       $order = $columns[$request->input('order.0.column')];
       $dir = $request->input('order.0.dir');
 
-      $totalData = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')->count();
+      $totalData = LogTesting::count();
 
-      if(empty($request))
+      if(empty($request->input('search.value')))
       {
-        $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
-          ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
-          ->offset($start)
+        $logs = LogTesting::offset($start)
           ->limit($limit)
           ->orderBy($order,$dir)
           ->get();
 
         $totalFiltered = $totalData;
       }
-      else if($request->input('search')) {
+      else {
         $search = $request->input('search.value');
 
-        $komentars = Komentar::selectRaw('komentar.id as idk, pengaduan.id as idp, komentar, pengtg_tgl, sentimen_awal, sentimen_akhir, peng_instansi, peng_topik, jenis_data')
-          ->join('pengaduan','komentar.peng_id','=','pengaduan.id')
-          ->where('peng_topik','LIKE',"%{$search}%")
+        $logs = LogTesting::where('threshold','LIKE',"%{$search}%")
           ->offset($start)
           ->limit($limit)
           ->orderBy($order,$dir)
           ->get();
 
-        $totalFiltered = Komentar::join('pengaduan','komentar.peng_id','=','pengaduan.id')
-          ->where('peng_topik','LIKE',"%{$search}%")
+        $totalFiltered = LogTesting::where('threshold','LIKE',"%{$search}%")
           ->count();
       }
 
       $data = array();
-      foreach ($komentars as $key=>$komentar)
+      foreach ($logs as $key=>$log)
       {
-          $selectAwal = '';
-          $classLabel = '';
-          $sentimen = $komentar->jenis_data==1?$komentar->sentimen_akhir:$komentar->sentimen_awal;
-          if($sentimen==0){$selectAwal='Netral'; $classLabel='label-default';}
-          else if($sentimen==1){$selectAwal='Positif'; $classLabel='label-success';}
-          else if($sentimen==2){$selectAwal='Negatif'; $classLabel='label-danger';}
-
           $nestedData['no'] = $start+$key+1;
-          $nestedData['peng_topik'] = "<b>$komentar->peng_topik</b>";
-          $nestedData['komentar'] = $komentar->komentar;
-          $nestedData['pengtg_tgl'] = $komentar->pengtg_tgl;
-          $nestedData['sentimen'] = "<span class='label $classLabel'>$selectAwal</span>";
-          $nestedData['aksi'] = "<button class='btn btn-success' onClick='detailPengaduan($komentar->idp)'><i class='fa fa-pencil'></i>&nbsp&nbsp Detail</button>
-                      <button class='btn btn-danger' onClick='deleteKomentar($komentar->idk)'><i class='fa fa-trash'></i>&nbsp&nbsp Hapus</button>";
+          $nestedData['threshold'] = $log->threshold;
+          $nestedData['total_data'] = $log->total_data;
+          $nestedData['cocok'] = $log->cocok;
+          $nestedData['tgl_log'] = $log->tgl_log;
+          $nestedData['akurasi'] = $log->akurasi;
+
           $data[] = $nestedData;
       }
 

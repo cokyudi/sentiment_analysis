@@ -20,7 +20,7 @@
 	        <thead class="red">
 	        <tr>
                 <th>No.</th>
-	        	<th>Kata</th>
+	        			<th>Kata</th>
                 <th>Frekuensi</th>
                 <th>Chisquare</th>
                 <th>Netral</th>
@@ -35,7 +35,7 @@
 	        <tfoot>
 	        <tr>
                 <th>No.</th>
-	          	<th>Kata</th>
+	          		<th>Kata</th>
                 <th>Frekuensi</th>
                 <th>Chisquare</th>
                 <th>Netral</th>

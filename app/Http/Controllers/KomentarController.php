@@ -32,7 +32,7 @@ class KomentarController extends Controller
 
         $totalData = Komentar::count();
 
-        if(empty($request->input('search.value')))
+        if(empty($request->input()))
         {
           $komentars = Komentar::offset($start)
     				->limit($limit)
@@ -41,17 +41,168 @@ class KomentarController extends Controller
 
           $totalFiltered = $totalData;
         }
-        else {
-          $search = $request->input('search.value');
+        else if(!empty($request->input())) {
+          if(!empty($request->input('search'))){
+            $search = $request->input('search.value');
 
-          $komentars =  Komentar::where('komentar','LIKE',"%{$search}%")
-            ->offset($start)
-            ->limit($limit)
-            ->orderBy($order,$dir)
-            ->get();
+            $komentars =  Komentar::where('komentar','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
 
-          $totalFiltered = Komentar::where('komentar','LIKE',"%{$search}%")
-            ->count();
+            $totalFiltered = Komentar::where('komentar','LIKE',"%{$search}%")
+              ->count();
+          }
+
+          if(!empty($request->input('sentimen'))){
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+
+            $komentars =  Komentar::where('sentimen_awal',$sentimen1)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::where('sentimen_awal',$sentimen1)
+              ->count();
+          }
+
+          if(!empty($request->input('jenis_data'))){
+            if($request->input('jenis_data')=='belum'){
+              $jenisData=3;
+            }
+            else if($request->input('jenis_data')=='training'){
+              $jenisData = 0;
+            }
+            else if($request->input('jenis_data')=='testing'){
+              $jenisData = 1;
+            }
+
+            $komentars =  Komentar::where('jenis_data',$jenisData)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::where('jenis_data',$jenisData)
+              ->count();
+          }
+
+          if(!empty($request->input('jenis_data')) AND !empty($request->input('search')) AND empty($request->input('sentimen')) ){
+            if($request->input('jenis_data')=='belum'){
+              $jenisData=3;
+            }
+            else if($request->input('jenis_data')=='training'){
+              $jenisData = 0;
+            }
+            else if($request->input('jenis_data')=='testing'){
+              $jenisData = 1;
+            }
+            $search = $request->input('search.value');
+
+            $komentars =  Komentar::where('jenis_data',$jenisData)
+              ->where('komentar','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::where('jenis_data',$jenisData)
+              ->where('komentar','LIKE',"%{$search}%")
+              ->count();
+          }
+
+          if(!empty($request->input('jenis_data')) AND empty($request->input('search')) AND !empty($request->input('sentimen')) ){
+            if($request->input('jenis_data')=='belum'){
+              $jenisData=3;
+            }
+            else if($request->input('jenis_data')=='training'){
+              $jenisData = 0;
+            }
+            else if($request->input('jenis_data')=='testing'){
+              $jenisData = 1;
+            }
+
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+
+            $komentars =  Komentar::where('jenis_data',$jenisData)
+              ->where('sentimen_awal',$sentimen1)
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::where('jenis_data',$jenisData)
+              ->where('sentimen_awal',$sentimen1)
+              ->count();
+          }
+
+          if(empty($request->input('jenis_data')) AND !empty($request->input('search')) AND !empty($request->input('sentimen')) ){
+
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+            $search = $request->input('search.value');
+
+            $komentars =  Komentar::where('sentimen_awal',$sentimen1)
+              ->where('komentar','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::where('sentimen_awal',$sentimen1)
+              ->where('komentar','LIKE',"%{$search}%")
+              ->count();
+          }
+
+          if(!empty($request->input('jenis_data')) AND !empty($request->input('search')) AND !empty($request->input('sentimen')) ){
+            if($request->input('jenis_data')=='belum'){
+              $jenisData=3;
+            }
+            else if($request->input('jenis_data')=='training'){
+              $jenisData = 0;
+            }
+            else if($request->input('jenis_data')=='testing'){
+              $jenisData = 1;
+            }
+
+            if($request->input('sentimen')==3){
+              $sentimen1=0;
+            }
+            else {
+              $sentimen1 = $request->input('sentimen');
+            }
+            $search = $request->input('search.value');
+
+            $komentars =  Komentar::where('jenis_data',$jenisData)
+              ->where('sentimen_awal',$sentimen1)
+              ->where('komentar','LIKE',"%{$search}%")
+              ->offset($start)
+              ->limit($limit)
+              ->orderBy($order,$dir)
+              ->get();
+
+            $totalFiltered = Komentar::where('jenis_data',$jenisData)
+              ->where('sentimen_awal',$sentimen1)
+              ->where('komentar','LIKE',"%{$search}%")
+              ->count();
+          }
+
         }
 
         $data = array();

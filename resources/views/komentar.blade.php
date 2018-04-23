@@ -14,6 +14,31 @@
 	    <!-- /.box-header -->
 	    <div class="box-body table-responsive">
 	      <table id="table-komentar" class="table table-bordered table-striped">
+					<div class="row">
+						<div class="col-sm-3">
+	            <div class="form-group">
+	              <label>Sentimen</label>
+	              <select name="sentimen" id="select-sentimen" class="form-control" required="true">
+									<option value="0" selected>Semua</option>
+	                <option value="3">Netral</option>
+	                <option value="1">Positif</option>
+	                <option value="2">Negatif</option>
+	              </select>
+	            </div>
+	          </div>
+						<div class="col-sm-3">
+	            <div class="form-group">
+	              <label>Jenis Data</label>
+	              <select name="jenis_data" id="select-jenis" class="form-control" required="true">
+									<option value="0" selected>Semua</option>
+	                <option value="belum">Belum</option>
+	                <option value="training">Training</option>
+	                <option value="testing">Testing</option>
+	              </select>
+	            </div>
+	          </div>
+					</div>
+
 	        <thead class="red">
 	        <tr>
                 <th>No.</th>
@@ -66,7 +91,11 @@
 				"url": "{{ URL('komentar/data') }}",
 				"dataType": "json",
 				"type": "POST",
-				"data":{ _token: "{{csrf_token()}}"}
+				"data": function ( data ) {
+              data._token = "{{csrf_token()}}";
+              data.sentimen = $('select[name=sentimen]').val();
+							data.jenis_data = $('select[name=jenis_data]').val();
+          }
 	      },
 	      "columns": [
 	        	{ "data": "no"},
@@ -77,6 +106,14 @@
 	      ],
 	      "order": [[3, "asc"]]
 	  	});
+
+			$('#select-sentimen').change(function() {
+        dataTableKomentar.draw();
+    	});
+
+			$('#select-jenis').change(function() {
+        dataTableKomentar.draw();
+    	});
 
 	});
 </script>
