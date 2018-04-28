@@ -46,7 +46,7 @@
               </div>
             </div>
           </div>
-          
+
           <div id="tindakLanjut" class="tab-pane fade">
             <div class="row">
               <div class="col-md-6 col-sm-12">

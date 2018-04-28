@@ -77,3 +77,5 @@ Route::get('/evaluasi', 'EvaluasiController@index');
 Route::post('/evaluasi/data', 'EvaluasiController@data');
 
 Route::get('/laporan', 'LaporanController@index');
+Route::post('/laporan/barChartData', 'LaporanController@barChartData');
+Route::post('/laporan/donutChartData', 'LaporanController@donutChartData');
