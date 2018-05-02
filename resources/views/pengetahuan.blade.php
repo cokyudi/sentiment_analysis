@@ -10,9 +10,9 @@
 	  <div class="box box-danger">
 	    <div class="box-header">
 	      <h3 class="box-title">Daftar Pengetahuan</h3>
-	      <div class="btn-group pull-right">
+	      <!-- <div class="btn-group pull-right">
 	      	<button class="btn btn-primary" onClick="addPengetahuan();"><i class="fa fa-plus"></i>&nbsp&nbsp Tambah Pengetahuan</button>
-	      </div>
+	      </div> -->
 	    </div>
 	    <!-- /.box-header -->
 	    <div class="box-body table-responsive">

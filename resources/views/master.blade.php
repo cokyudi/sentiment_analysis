@@ -146,11 +146,11 @@
             <i class="fa fa-check"></i> <span>Evaluasi</span>
           </a>
         </li>
-        <li id="menu-setting">
+        <!-- <li id="menu-setting">
           <a href="{{URL('setting')}}">
             <i class="fa fa-gears"></i> <span>Pengaturan</span>
           </a>
-        </li>
+        </li> -->
         @endif
       </ul>
     </section>

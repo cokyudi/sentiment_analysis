@@ -235,7 +235,6 @@ class KomentarController extends Controller
                     <option $selectAwal3 value='2'>Negatif</option>
                   </select>";
             $nestedData['aksi'] = "<div class='btn-group'>
-    					<button class='btn btn-success' onClick='editKomentar($komentar->id)'><i class='fa fa-pencil'></i>&nbsp&nbsp Ubah</button>
                         <button class='btn btn-danger' onClick='deleteKomentar($komentar->id)'><i class='fa fa-trash'></i>&nbsp&nbsp Hapus</button>
             </div>";
             $data[] = $nestedData;

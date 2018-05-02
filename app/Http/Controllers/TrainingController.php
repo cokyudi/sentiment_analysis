@@ -96,7 +96,7 @@ class TrainingController extends Controller
             $trainings = $komentar->komentar;
             $id = $komentar->id;
             //Membersihkan Kata
-            $training = strtolower(preg_replace('([.,/123457890@])','',$trainings));
+            $training = strtolower(preg_replace('([.,/123457890@!#$%&-_=+?`~{;:<>}])','',$trainings));
             $training = strtolower(preg_replace('([\n\r])',' ',$training));
             //tokenize
             $katass = array_values(array_filter((explode(' ',$training))));
@@ -196,6 +196,7 @@ class TrainingController extends Controller
                         //penyebut
                         $penyebut = $AC*$BD*$AB*$CD;
 
+                        //Chi-square
                         $x[$key][$k] = $pembilang/$penyebut;
 
                         //hitung Probabilitas kata ke-n dengan diketahui kelas $k
