@@ -11,7 +11,7 @@
 	    <div class="box-header">
 	      <h3 class="box-title">Training</h3>
 	      <div class="btn-group pull-right">
-	      	<button class="btn btn-primary" onClick="doTraining();"><i class="fa fa-plus"></i>&nbsp&nbsp Training</button>
+	      	<button class="btn btn-lg btn-primary" onClick="doTraining();">Training</button>
 	      </div>
 	    </div>
 	    <!-- /.box-header -->

@@ -29,7 +29,7 @@ $('#modal-testing form').validate({
     })
     .done(function(data) {
       if(data.status==='OK'){
-        swal({title: 'Sukses!', text: JSON.stringify(data.message), buttonsStyling: false, confirmButtonClass: "btn btn-success", type: "success"});
+        swal({title: 'Sukses!', text: data.message, buttonsStyling: false, confirmButtonClass: "btn btn-success", type: "success"});
         if (typeof dataTableTesting !== 'undefined') {
           dataTableTesting.ajax.reload();
         }

@@ -109,9 +109,9 @@
             { "data": "komentar" },
             { "data": "pengtg_tgl" },
             { "data": "sentimen" },
-	        { "data": "aksi", "orderable": false }
+	        	{ "data": "aksi", "orderable": false }
 	      ],
-	      "order": [[4, "asc"]]
+	      "order": [[4, "desc"]]
 	  	});
 
 			$('#select-sentimen').change(function() {

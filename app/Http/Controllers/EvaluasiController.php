@@ -20,6 +20,13 @@ class EvaluasiController extends Controller
       $data['tEmpat'] = LogTesting::where('threshold', '4')->max('akurasi');
       $data['tTerbaik'] = max($data['tNol'],$data['tSatu'],$data['tDua'],$data['tTiga'],$data['tEmpat']);
 
+      $data['tNol1'] = LogTesting::where('threshold', '0')->min('waktu_proses');
+      $data['tSatu1'] = LogTesting::where('threshold', '1')->min('waktu_proses');
+      $data['tDua1'] = LogTesting::where('threshold', '2')->min('waktu_proses');
+      $data['tTiga1'] = LogTesting::where('threshold', '3')->min('waktu_proses');
+      $data['tEmpat1'] = LogTesting::where('threshold', '4')->min('waktu_proses');
+      $data['tTerbaik1'] = min($data['tNol1'],$data['tSatu1'],$data['tDua1'],$data['tTiga1'],$data['tEmpat1']);
+
       return view('evaluasi',$data);
   }
 
@@ -28,7 +35,7 @@ class EvaluasiController extends Controller
         0 =>'threshold',
         1 =>'total_data',
         2 =>'cocok',
-        3 =>'tgl_log',
+        3 =>'waktu_proses',
         4 =>'akurasi',
         5 =>'id'
       );
@@ -69,7 +76,7 @@ class EvaluasiController extends Controller
           $nestedData['threshold'] = $log->threshold;
           $nestedData['total_data'] = $log->total_data;
           $nestedData['cocok'] = $log->cocok;
-          $nestedData['tgl_log'] = $log->tgl_log;
+          $nestedData['waktu_proses'] = $log->waktu_proses;
           $nestedData['akurasi'] = $log->akurasi;
 
           $data[] = $nestedData;

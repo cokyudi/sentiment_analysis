@@ -10,8 +10,9 @@
 	  <div class="box box-danger">
 	    <div class="box-header">
 	      <h3 class="box-title">Testing</h3>
-	      <div class="btn-group pull-right">
-	      	<button class="btn btn-primary" onClick="doTesting();"><i class="fa fa-plus"></i>&nbsp&nbsp Testing</button>
+	      <div class="pull-right">
+	      	<button class="btn btn-lg btn-primary" onClick="doTesting();">Testing</button>
+					<button class="btn btn-lg btn-primary" onClick="doOneTesting();">Data Baru</button>
 	      </div>
 	    </div>
 	    <!-- /.box-header -->
@@ -20,10 +21,10 @@
 	        <thead class="red">
 	        <tr>
                 <th>No.</th>
-	        	<th>Komentar</th>
-	        	<th>Text Processing</th>
+	        			<th>Komentar</th>
+	        			<th>Text Processing</th>
                 <th>Sentimen Pakar</th>
-				<th>Sentimen Sistem</th>
+								<th>Sentimen Sistem</th>
 	        </tr>
 	        </thead>
 	        <tbody>
@@ -32,10 +33,10 @@
 	        <tfoot>
 	        <tr>
                 <th>No.</th>
-	        	<th>Komentar</th>
-	        	<th>Text Processing</th>
+	        			<th>Komentar</th>
+	        			<th>Text Processing</th>
                 <th>Sentimen Pakar</th>
-				<th>Sentimen Sistem</th>
+								<th>Sentimen Sistem</th>
 	        </tr>
 	        </tfoot>
 	      </table>
@@ -72,11 +73,11 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no"},
-	        { "data": "komentar"},
+	        	{ "data": "no"},
+	        	{ "data": "komentar"},
             { "data": "text_prc"},
             { "data": "sentimen_awal"},
-			{ "data": "sentimen_akhir"}
+						{ "data": "sentimen_akhir"}
 	      ],
 	      "order": [[4, "asc"]]
 	  	});

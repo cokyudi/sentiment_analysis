@@ -58,6 +58,7 @@ Route::post('/training/doTraining', 'TrainingController@doTraining');
 Route::get('/testing', 'TestingController@index');
 Route::post('/testing/data', 'TestingController@data');
 Route::post('/testing/doTesting', 'TestingController@doTesting');
+Route::post('/testing/doOneTesting', 'TestingController@doOneTesting');
 
 Route::get('/pengetahuan', 'PengetahuanController@index');
 Route::post('/pengetahuan/data', 'PengetahuanController@data');

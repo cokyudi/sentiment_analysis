@@ -98,6 +98,7 @@ class TestingController extends Controller
 
     public function doTesting(Request $request)
     {
+        $time_start = microtime(true);
         //Text Preprocessing
         $komentars = Komentar::where('jenis_data','1')->get();
         $n = Komentar::where('jenis_data','0')->count();
@@ -200,18 +201,143 @@ class TestingController extends Controller
             }
         }
         $data[] = $data2;
+        $time_end = microtime(true);
+        $exeTime = $time_end - $time_start;
+
         $logTesting = new LogTesting;
         $logTesting->threshold = $threshold;
         $logTesting->total_data = count($fiturs);
         $logTesting->cocok = $cocok;
         $logTesting->akurasi = ($cocok/count($fiturs))*100;
+        $logTesting->waktu_proses = $exeTime;
         $logTesting->tgl_log = date("Y-m-d H:i:s");
         $logTesting->save();
 
         if($data){
             $response = array(
     	  		'status' => 'OK',
-    	  		'message' => $data
+    	  		'message' => 'Testing Berhasil'
+    	  	);
+        }
+        else {
+            $response = array(
+    	  		'status' => 'error',
+    	  		'message' => 'Testing gagal'
+    	  	);
+        }
+        return response()->json($response);
+    }
+
+    public function doOneTesting(Request $request){
+
+        $time_start = microtime(true);
+
+        $testings = $request->input('komentar');
+        $n = Komentar::where('jenis_data','0')->count();
+        $threshold = $request->input('threshold');
+
+        //$data = array();
+        //Membersihkan Kata
+        $testing = strtolower(preg_replace('([.,/123457890@])','',$testings));
+        $testing = strtolower(preg_replace('([\n\r])',' ',$testing));
+        //tokenize
+        $katass = array_values(array_filter((explode(' ',$testing))));
+        //pengembalian kata (kamus,kata singkatan)
+        $data2 = array();
+        foreach ($katass as $katas) {
+            $kamus = Kamus::select('kata_asli')->where('kata_singkatan',$katas)->first();
+            if($kamus){
+                $kata = $kamus->kata_asli;
+            }
+            else{
+                $kata = $katas;
+            }
+            //menghilangkan stopword
+            $stopword = Stopword::select('kata')->where('kata',$kata)->first();
+            if($stopword){
+                $data2[] = '';
+            }
+            else {
+                $data2[] = $kata;
+            }
+        }
+        //stemming
+        $stemmerFactory = new \Sastrawi\Stemmer\StemmerFactory;
+        $stemmer  = $stemmerFactory->createStemmer();
+        $sentence = implode(' ',array_values(array_unique(array_filter($data2))));
+        $output = $stemmer->stem($sentence);
+
+        $prepros = $output;
+        $ts = explode(' ',$prepros);
+        $jumKata = 0;
+        $probKomentar = array();
+        $probKata = array();
+        $probKatas = array();
+        for ($k=0; $k<3 ; $k++) {
+
+            $nc = Komentar::where('jenis_data','0')->where('sentimen_awal',$k)->count();
+            $prior = $nc/$n;
+            $probKatas[$k] = 1;
+            foreach ($ts as $key2 => $t) {
+                $pengetahuan = Pengetahuan::where('kata',$t)->first();
+
+                if($pengetahuan){
+                    $chisquare = $pengetahuan->n_chisquare;
+                }
+
+                if($pengetahuan AND $chisquare>=$threshold){
+                    if($k==0){
+                        $probKata[0][$key2] = $pengetahuan->n_netral;
+                    }
+                    else if ($k==1) {
+                        $probKata[1][$key2] = $pengetahuan->n_positif;
+                    }
+                    else if ($k==2) {
+                        $probKata[2][$key2] = $pengetahuan->n_negatif;
+                    }
+                    $jumKata++;
+                }
+                else {
+                    $probKata[$k][$key2] = 1;
+                }
+
+                $probKatas[$k]=$probKatas[$k]*$probKata[$k][$key2];
+            }
+            $probKomentar[$k]=$prior*$probKatas[$k];
+        }
+        $data = array_search(max($probKomentar),$probKomentar);
+        $time_end = microtime(true);
+        $exeTime = $time_end - $time_start;
+
+        if(isset($data)){
+            if($data==0){
+              $hasil = "<span class='label label-default'>Netral</span>";
+              $btn = "btn btn-warning";
+              $tipe = "warning";
+            }
+            else if($data==1){
+              $hasil = "<span class='label label-success'>Positif</span>";
+              $btn = "btn btn-success";
+              $tipe = "success";
+            }
+            else if($data==2){
+              $hasil = "<span class='label label-danger'>Negatif</span>";
+              $btn = "btn btn-danger";
+              $tipe = "error";
+            }
+
+            $response = array(
+    	  		'status' => 'OK',
+    	  		'message' => $testings,
+            'hasil' => $hasil,
+            'btn' => $btn,
+            'tipe' => $tipe,
+            'threshold' => $threshold,
+            'hasil_text_prc' => $output,
+            'jumlah kata' => $jumKata/3,
+            'prob_netral' => $probKomentar[0],
+            'prob_positif' => $probKomentar[1],
+            'prob_negatif' => $probKomentar[2],
     	  	);
         }
         else {

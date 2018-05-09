@@ -197,12 +197,12 @@ class TrainingController extends Controller
                         $penyebut = $AC*$BD*$AB*$CD;
 
                         //Chi-square
-                        $x[$key][$k] = $pembilang/$penyebut;
+                        $x[$key][$k] = $penyebut!=0?$pembilang/$penyebut:0;
 
                         //hitung Probabilitas kata ke-n dengan diketahui kelas $k
                         $pembilang2 = $A + 1;
                         $penyebut2 = $cs[$k] + $v;
-                        $ptn[$key][$k] = $pembilang2/$penyebut2;
+                        $ptn[$key][$k] = $penyebut2!=0?$pembilang2/$penyebut2:0;
                     }
                     $hasil[$key] = 0;
                     for ($k=0; $k<3 ; $k++) {
@@ -228,7 +228,7 @@ class TrainingController extends Controller
         if($data){
             $response = array(
     	  		'status' => 'OK',
-    	  		'message' => $data
+    	  		'message' => 'Training Berhasil'
     	  	);
         }
         else {

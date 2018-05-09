@@ -9,7 +9,7 @@
 
 	  <div class="box box-danger">
 	    <div class="box-header">
-	      <h3 class="box-title">Evaluasi</h3>
+	      <h3 class="box-title">Akurasi</h3>
 	    </div>
 	    <!-- /.box-header -->
 	    <div class="box-body">
@@ -94,6 +94,91 @@
 
 	  <div class="box box-danger">
 	    <div class="box-header">
+	      <h3 class="box-title">Waktu Proses</h3>
+	    </div>
+	    <!-- /.box-header -->
+	    <div class="box-body">
+			<div class="row">
+		        <div class="col-lg-2 col-xs-12">
+		          <!-- small box -->
+		          <div class="small-box bg-aqua">
+		            <div class="inner">
+		              <h3><?=$tNol1;?></h3>
+
+		              <p>Threshold 0</p>
+		            </div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		        <div class="col-lg-2 col-xs-12">
+		          <!-- small box -->
+		          <div class="small-box bg-green">
+		            <div class="inner">
+		              <h3><?=$tSatu1;?>%</h3>
+
+		              <p>Threshold 1</p>
+		            </div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		        <div class="col-lg-2 col-xs-12">
+		          <!-- small box -->
+		          <div class="small-box bg-yellow">
+		            <div class="inner">
+		              <h3><?=$tDua1;?>%</h3>
+
+		              <p>Threshold 2</p>
+		            </div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		        <div class="col-lg-2 col-xs-12">
+		          <!-- small box -->
+		          <div class="small-box bg-red">
+		            <div class="inner">
+		              <h3><?=$tTiga1;?>%</h3>
+
+		              <p>Threshold 3</p>
+		            </div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+						<div class="col-lg-2 col-xs-12">
+		          <!-- small box -->
+		          <div class="small-box bg-blue">
+		            <div class="inner">
+		              <h3><?=$tEmpat1;?>%</h3>
+
+		              <p>Threshold 4</p>
+		            </div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+						<div class="col-lg-2 col-xs-12">
+		          <!-- small box -->
+		          <div class="small-box bg-purple">
+		            <div class="inner">
+		              <h3><?=$tTerbaik1;?>%</h3>
+
+		              <p>Terbaik</p>
+		            </div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		    </div>
+	    </div>
+	    <!-- /.box-body -->
+	  </div>
+	  <!-- /.box -->
+	</div>
+	<!-- /.col -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-xs-12">
+
+	  <div class="box box-danger">
+	    <div class="box-header">
 	      <h3 class="box-title">Evaluasi</h3>
 	    </div>
 	    <!-- /.box-header -->
@@ -105,7 +190,7 @@
   	        			<th>Threshold</th>
                   <th>Total Data</th>
                   <th>Cocok</th>
-                  <th>Tanggal Testing</th>
+                  <th>Waktu Proses</th>
                   <th>Akurasi</th>
   	        </tr>
 	        </thead>
@@ -118,7 +203,7 @@
                   <th>Threshold</th>
                   <th>Total Data</th>
                   <th>Cocok</th>
-                  <th>Tanggal Testing</th>
+                  <th>Waktu Proses</th>
                   <th>Akurasi</th>
   	        </tr>
 	        </tfoot>
@@ -160,10 +245,10 @@
 	          { "data": "threshold" },
             { "data": "total_data" },
             { "data": "cocok" },
-            { "data": "tgl_log" },
+            { "data": "waktu_proses" },
             { "data": "akurasi" }
 	      ],
-	      "order": [[3, "desc"]]
+	      "order": [[0, "asc"]]
 	  	});
 
 	});
