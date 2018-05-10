@@ -270,6 +270,7 @@ class TestingController extends Controller
         $prepros = $output;
         $ts = explode(' ',$prepros);
         $jumKata = 0;
+        $noKata =array();
         $probKomentar = array();
         $probKata = array();
         $probKatas = array();
@@ -299,6 +300,7 @@ class TestingController extends Controller
                 }
                 else {
                     $probKata[$k][$key2] = 1;
+                    $noKata[] = $t;
                 }
 
                 $probKatas[$k]=$probKatas[$k]*$probKata[$k][$key2];
@@ -338,6 +340,7 @@ class TestingController extends Controller
             'prob_netral' => $probKomentar[0],
             'prob_positif' => $probKomentar[1],
             'prob_negatif' => $probKomentar[2],
+            'seleksi_kata' => array_unique($noKata)
     	  	);
         }
         else {

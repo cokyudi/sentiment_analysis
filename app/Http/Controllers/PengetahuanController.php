@@ -17,13 +17,13 @@ class PengetahuanController extends Controller
 
     public function data(Request $request){
 	    $columns = array(
-          0 =>'kata',
-          1 =>'frekuensi',
-          2 =>'n_chisquare',
-          3 =>'n_netral',
-          4 =>'n_positif',
-          5 =>'n_negatif',
-          6 =>'id',
+          0 =>'id',
+          1 =>'kata',
+          2 =>'frekuensi',
+          3 =>'n_chisquare',
+          4 =>'n_netral',
+          5 =>'n_positif',
+          6 =>'n_negatif',
         );
 
       	$limit = $request->input('length');

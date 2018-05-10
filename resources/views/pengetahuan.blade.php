@@ -78,8 +78,8 @@
 				"data":{ _token: "{{csrf_token()}}"}
 	      },
 	      "columns": [
-	        { "data": "no" },
-	        { "data": "kata" },
+	        	{ "data": "no" },
+	        	{ "data": "kata" },
             { "data": "frekuensi" },
             { "data": "n_chisquare" },
             { "data": "n_netral" },
@@ -87,7 +87,7 @@
             { "data": "n_negatif" },
 	        { "data": "aksi", "orderable": false }
 	      ],
-	      "order": [[1, "desc"]]
+	      "order": [[2, "desc"]]
 	  	});
 
 	});

@@ -103,7 +103,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-aqua">
 		            <div class="inner">
-		              <h3><?=$tNol1;?></h3>
+		              <h3><?=$tNol1;?> detik</h3>
 
 		              <p>Threshold 0</p>
 		            </div>
@@ -114,7 +114,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-green">
 		            <div class="inner">
-		              <h3><?=$tSatu1;?>%</h3>
+		              <h3><?=$tSatu1;?> detik</h3>
 
 		              <p>Threshold 1</p>
 		            </div>
@@ -125,7 +125,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-yellow">
 		            <div class="inner">
-		              <h3><?=$tDua1;?>%</h3>
+		              <h3><?=$tDua1;?> detik</h3>
 
 		              <p>Threshold 2</p>
 		            </div>
@@ -136,7 +136,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-red">
 		            <div class="inner">
-		              <h3><?=$tTiga1;?>%</h3>
+		              <h3><?=$tTiga1;?> detik</h3>
 
 		              <p>Threshold 3</p>
 		            </div>
@@ -147,7 +147,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-blue">
 		            <div class="inner">
-		              <h3><?=$tEmpat1;?>%</h3>
+		              <h3><?=$tEmpat1;?> detik</h3>
 
 		              <p>Threshold 4</p>
 		            </div>
@@ -158,7 +158,7 @@
 		          <!-- small box -->
 		          <div class="small-box bg-purple">
 		            <div class="inner">
-		              <h3><?=$tTerbaik1;?>%</h3>
+		              <h3><?=$tTerbaik1;?> detik</h3>
 
 		              <p>Terbaik</p>
 		            </div>
