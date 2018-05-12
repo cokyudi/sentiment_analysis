@@ -36,8 +36,9 @@ class EvaluasiController extends Controller
         1 =>'total_data',
         2 =>'cocok',
         3 =>'waktu_proses',
-        4 =>'akurasi',
-        5 =>'id'
+        4 =>'seleksi_kata',
+        5 =>'akurasi',
+        6 =>'id'
       );
 
       $limit = $request->input('length');
@@ -76,6 +77,7 @@ class EvaluasiController extends Controller
           $nestedData['threshold'] = $log->threshold;
           $nestedData['total_data'] = $log->total_data;
           $nestedData['cocok'] = $log->cocok;
+          $nestedData['seleksi_kata'] = $log->seleksi_kata;
           $nestedData['waktu_proses'] = $log->waktu_proses;
           $nestedData['akurasi'] = $log->akurasi;
 

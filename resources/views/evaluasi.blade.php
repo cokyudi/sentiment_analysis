@@ -190,6 +190,7 @@
   	        			<th>Threshold</th>
                   <th>Total Data</th>
                   <th>Cocok</th>
+									<th>Seleksi Kata</th>
                   <th>Waktu Proses</th>
                   <th>Akurasi</th>
   	        </tr>
@@ -203,6 +204,7 @@
                   <th>Threshold</th>
                   <th>Total Data</th>
                   <th>Cocok</th>
+									<th>Seleksi Kata</th>
                   <th>Waktu Proses</th>
                   <th>Akurasi</th>
   	        </tr>
@@ -245,6 +247,7 @@
 	          { "data": "threshold" },
             { "data": "total_data" },
             { "data": "cocok" },
+						{ "data": "seleksi_kata" },
             { "data": "waktu_proses" },
             { "data": "akurasi" }
 	      ],

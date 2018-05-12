@@ -149,6 +149,8 @@ class TestingController extends Controller
         $fiturs = Komentar::where('jenis_data','1')->get();
         $threshold = $request->input('threshold');
         $cocok = 0;
+        $seleksiKata = 0;
+        $jumlahKata = 0;
         foreach ($fiturs as $key => $fitur) {
 
             $id = $fitur->id;
@@ -182,9 +184,11 @@ class TestingController extends Controller
                         else if ($k==2) {
                             $probKata[2][$key2] = $pengetahuan->n_negatif;
                         }
+                        $jumlahKata++;
                     }
                     else {
                         $probKata[$k][$key2] = 1;
+                        $seleksiKata++;
                     }
 
                     $probKatas[$k]=$probKatas[$k]*$probKata[$k][$key2];
@@ -211,12 +215,15 @@ class TestingController extends Controller
         $logTesting->akurasi = ($cocok/count($fiturs))*100;
         $logTesting->waktu_proses = $exeTime;
         $logTesting->tgl_log = date("Y-m-d H:i:s");
+        $logTesting->seleksi_kata = $seleksiKata/3;
         $logTesting->save();
 
         if($data){
             $response = array(
     	  		'status' => 'OK',
-    	  		'message' => 'Testing Berhasil'
+    	  		'message' => 'Testing Berhasil',
+            'seleksi_kata' => $seleksiKata/3,
+            'jumlah_kata' => $jumlahKata/3
     	  	);
         }
         else {
