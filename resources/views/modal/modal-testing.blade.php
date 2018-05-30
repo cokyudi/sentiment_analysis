@@ -24,6 +24,10 @@
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="40">50</option>
                     </select>
                 </div>
             </div>

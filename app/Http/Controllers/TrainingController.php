@@ -132,7 +132,6 @@ class TrainingController extends Controller
             //$data[] = $output;
         }
         //Seleksi Fitur Chisquare
-        //APAKAH KATA PADA DOKUMEN DIBUAT UNIK DAHULU ?????
 
         $fiturs = Komentar::where('jenis_data','0')->get();
         $v = 0; //jumlah seluruh kata pada data training

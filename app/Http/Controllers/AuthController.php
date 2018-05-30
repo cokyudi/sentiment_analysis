@@ -9,7 +9,7 @@ use App\Admin;
 class AuthController extends Controller
 {
     public function login(Request $request){
-      if(Auth::user()){
+      if($request->session()->has('admin')){
         return redirect('dashboard');
       }
       else {

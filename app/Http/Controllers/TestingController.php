@@ -151,6 +151,7 @@ class TestingController extends Controller
         $cocok = 0;
         $seleksiKata = 0;
         $jumlahKata = 0;
+        $seluruhKata = 0;
         foreach ($fiturs as $key => $fitur) {
 
             $id = $fitur->id;
@@ -158,7 +159,7 @@ class TestingController extends Controller
 
             $prepros = $fitur->text_prc;
             $ts = explode(' ',$prepros);
-
+            $seluruhKata = $seluruhKata + count($ts);
             $probKomentar = array();
             $probKata = array();
             $probKatas = array();
@@ -223,7 +224,8 @@ class TestingController extends Controller
     	  		'status' => 'OK',
     	  		'message' => 'Testing Berhasil',
             'seleksi_kata' => $seleksiKata/3,
-            'jumlah_kata' => $jumlahKata/3
+            'jumlah_kata' => $jumlahKata/3,
+            'seluruh kata' => $seluruhKata
     	  	);
         }
         else {
